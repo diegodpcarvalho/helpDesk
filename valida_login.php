@@ -1,12 +1,25 @@
 <?php
 
-print_r($_POST);
+//variavel que verifica se a autenticacao foi realizada
+$usuario_autenticado = false;
 
-echo '<br/>';
+//USUARIOS DO SISTEMA
+$usuarios_app = array(
+    array('email' => 'adm@teste.com.br', 'senha' => '123456'),
+    array('email' => 'user@teste.com.br', 'senha' => 'abcd')
+);
 
-echo $_POST['email'];
-echo '<br/>';
-echo $_POST['senha'];
+foreach($usuarios_app as $user){
+    if($user['email'] == $_POST['email'] && $user['senha'] == $_POST['senha']){
+        $usuario_autenticado = true;
+    }
+}
+
+if($usuario_autenticado){
+    echo 'Usuário autenticado.';
+}else{
+    header('location: index.php?login=erro');
+}
 
 
 
